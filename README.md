@@ -1,2 +1,71 @@
-# yatube_parsing
-Scrapy project - Parser for Yatube
+# Yatube Parser
+
+## Описание
+
+Учебный проект для практики создания асинхронных парсеров, работы во фреймворке Scrapy и с библиотекой SQLAlchemy.
+
+Парсится тестовый сайт по адресу: http://51.250.32.185/
+
+В проекте реализована работа двух пауков:
+- **yatube** - осуществляет поиск на всех страницах сайта постов, написанных в понедельник, создает базу данных sqlite и заполняет её информацией из найденных постов.
+- **group** - осуществляет поиск на всех страницах сайта ссылок на существующие группы, переходит на страницы групп и выводит в файл .csv информацию о группе и количество постов в ней.
+
+## Ключевые технологии и библиотеки:
+- [Python](https://www.python.org/);
+- [Scrapy](https://pypi.org/project/Scrapy/);
+- [SQLAlchemy](https://pypi.org/project/SQLAlchemy/);
+
+## Установка
+1. Склонируйте репозиторий:
+```
+git clone git@github.com:AbbadonAA/yatube_parsing.git
+```
+2. Активируйте venv и установите зависимости:
+```
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+3. Проект готов к запуску.
+
+## Управление:
+---
+- Запуск паука **yatube**:
+```
+scrapy crawl yatube
+```
+Будет создана база данных sqlite.db и заполнена полученными данными.
+
+---
+
+- Запуск паука **group**:
+```
+scrapy crawl group -O <имя_файла>.csv
+```
+Будет создан файл <имя_файла>.csv с полученными данными.
+
+---
+
+- Альтернативный запуск паука **yatube** для сбора данных обо всех постах:
+    1. В файле yatube.py необходимо закомментировать строки:
+    ```
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'yatube_parsing.pipelines.MondayPipeline': 300
+        }
+    }
+    ```
+    2. Сохраните файл;
+    3. Выполните команду:
+    ```
+    scrapy crawl yatube -O <имя_файла>.csv
+    ```
+Будет создан файл <имя_файла>.csv с данными из всех постов на сайте.
+
+## Лицензия
+- ### **MIT License**
+
+### Автор
+Pushkarev Anton
+
+pushkarevantona@gmail.com

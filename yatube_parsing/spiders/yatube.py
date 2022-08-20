@@ -7,6 +7,11 @@ class YatubeSpider(scrapy.Spider):
     name = 'yatube'
     allowed_domains = ['51.250.32.185']
     start_urls = ['http://51.250.32.185/']
+    custom_settings = {
+        'ITEM_PIPELINES': {
+            'yatube_parsing.pipelines.MondayPipeline': 300
+        }
+    }
 
     def parse(self, response):
         for citation in response.css('div.card-body'):
