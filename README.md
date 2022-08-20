@@ -29,7 +29,6 @@ pip install -r requirements.txt
 3. Проект готов к запуску.
 
 ## Управление:
----
 - Запуск паука **yatube**:
 ```
 scrapy crawl yatube
@@ -61,6 +60,8 @@ scrapy crawl group -O <имя_файла>.csv
     scrapy crawl yatube -O <имя_файла>.csv
     ```
 Будет создан файл <имя_файла>.csv с данными из всех постов на сайте.
+
+---
 
 ## Лицензия
 - ### **MIT License**
